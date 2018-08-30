@@ -1,28 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab|Sacramento");
-
-html {
-  box-sizing: border-box;
-  font-family: Roboto, sans-serif;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Roboto Slab", serif;
-}
-
-p {
-  font-size: 1.5rem;
-  line-height: 1.3;
-}
-
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.25s;
