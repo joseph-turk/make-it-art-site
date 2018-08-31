@@ -28,17 +28,14 @@
           :class="{ 'is-active': isOpen }"
         >
           <div class="navbar-start">
-            <router-link class="navbar-item" to="/in-the-classroom">
-              In the Classroom
-            </router-link>
-            <router-link class="navbar-item" to="/together">
-              Together
-            </router-link>
-            <router-link class="navbar-item" to="/at-home">
-              At Home
-            </router-link>
-            <router-link class="navbar-item" to="/by-rose">
-              Made by Rose
+            <router-link
+              v-for="link in links"
+              :key="link.path"
+              class="navbar-item"
+              :to="link.path"
+              @click.native="toggleNavbar"
+            >
+              {{ link.title }}
             </router-link>
           </div>
         </div>
@@ -51,7 +48,25 @@
 export default {
   data () {
     return {
-      isOpen: false
+      isOpen: false,
+      links: [
+        {
+          path: '/in-the-classroom',
+          title: 'In the Classroom'
+        },
+        {
+          path: '/together',
+          title: 'Together'
+        },
+        {
+          path: '/at-home',
+          title: 'At Home'
+        },
+        {
+          path: '/by-rose',
+          title: 'Made by Rose'
+        }
+      ]
     }
   },
 
@@ -66,11 +81,15 @@ export default {
 
 <style scoped>
 .navbar-brand {
-  font-size: 2.5em;
+  font-size: 2em;
   font-family: Sacramento;
 }
 .navbar-brand a {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.navbar-burger {
+  height: 72px;
+  width: 72px;
 }
 </style>

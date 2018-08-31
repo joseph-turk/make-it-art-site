@@ -8,3 +8,7 @@
 .page-leave-active {
   opacity: 0;
 }
+
+.columns.is-mobile {
+  flex-wrap: wrap;
+}
