@@ -19,7 +19,7 @@ module.exports = {
   /*
   ** Customize the progress bar color
   */
-  loading: { color: "#3B8070" },
+  loading: { color: "#00d1b1" },
   /*
   ** Build configuration
   */
@@ -41,5 +41,8 @@ module.exports = {
   generate: {
     fallback: true
   },
-  plugins: ["~/plugins/global-components"]
+  plugins: ["~/plugins/global-components"],
+  router: {
+    linkActiveClass: "is-active"
+  }
 };

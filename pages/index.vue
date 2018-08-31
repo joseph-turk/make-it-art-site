@@ -1,10 +1,10 @@
 <template>
   <div>
-    <section class="hero is-large is-info is-bold">
+    <section class="hero is-large is-primary is-bold">
       <div class="hero-body">
-        <div class="container has-text-centered">
+        <div class="container welcome-container has-text-centered">
           <h1 class="title is-1">Welcome</h1>
-          <h3 class="subtitle is-3"><em>Make it Art</em> is a place to embrace your creativity</h3>
+          <h3 class="subtitle is-3">This section will have a message to greet site visitors and draw them in</h3>
         </div>
       </div>
     </section>
@@ -32,12 +32,12 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-4by3">
-                  <img src="~/assets/img/home-craft.jpg">
+                  <img src="~/assets/img/art-studio.jpg">
                 </figure>
               </div>
 
               <footer class="card-footer">
-                <nuxt-link class="card-footer-item is-size-4" to="/at-home">Projects for Home</nuxt-link>
+                <nuxt-link class="card-footer-item is-size-4" to="/together">Events in the Studio</nuxt-link>
               </footer>
             </div>
           </div>
@@ -46,12 +46,12 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-4by3">
-                  <img src="~/assets/img/art-studio.jpg">
+                  <img src="~/assets/img/home-craft.jpg">
                 </figure>
               </div>
 
               <footer class="card-footer">
-                <nuxt-link class="card-footer-item is-size-4" to="/together">Events in the Studio</nuxt-link>
+                <nuxt-link class="card-footer-item is-size-4" to="/at-home">Projects for Home</nuxt-link>
               </footer>
             </div>
           </div>
@@ -108,3 +108,9 @@
     </section>
   </div>
 </template>
+
+<style scoped>
+.welcome-container {
+  max-width: 680px;
+}
+</style>

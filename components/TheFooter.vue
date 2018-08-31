@@ -1,5 +1,5 @@
 <template>
-  <footer class="has-background-grey has-text-light">
+  <footer class="has-background-dark has-text-light">
     <div class="container">
       &copy; {{ new Date().getFullYear() }} Rose Lange
     </div>
