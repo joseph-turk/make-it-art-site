@@ -24,9 +24,6 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** Run ESLint on save
-    */
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -35,6 +32,11 @@ module.exports = {
           loader: "eslint-loader",
           exclude: /(node_modules)/
         });
+      }
+    },
+    postcss: {
+      plugins: {
+        'postcss-custom-properties': false
       }
     }
   },

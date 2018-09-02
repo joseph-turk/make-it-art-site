@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="hero is-large is-primary is-bold">
+    <section class="hero is-large is-primary">
       <div class="hero-body">
         <div class="container welcome-container has-text-centered">
           <h1 class="title is-1">Welcome</h1>
