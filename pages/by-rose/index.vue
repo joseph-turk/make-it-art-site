@@ -52,7 +52,7 @@ export default {
   },
 
   created () {
-    axios.get('http://localhost:8000/artwork/list/')
+    axios.get(`${process.env.apiUrl}/artwork/list/`)
       .then(response => {
         this.forSale = response.data.filter(artwork => !artwork.is_sold)
         this.recentlySold = response.data.filter(artwork => artwork.is_sold)

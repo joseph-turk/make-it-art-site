@@ -38,6 +38,12 @@
               {{ link.title }}
             </router-link>
           </div>
+
+          <div class="navbar-end">
+            <router-link to="/admin" class="navbar-item">
+              Admin
+            </router-link>
+          </div>
         </div>
       </div>
     </nav>

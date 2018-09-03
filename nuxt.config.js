@@ -1,7 +1,4 @@
 module.exports = {
-  /*
-  ** Headers of the page
-  */
   head: {
     title: "Make it Art",
     meta: [
@@ -16,13 +13,7 @@ module.exports = {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   css: ["bulma/css/bulma.min.css", "~/css/main.css"],
-  /*
-  ** Customize the progress bar color
-  */
   loading: { color: "#00d1b1" },
-  /*
-  ** Build configuration
-  */
   build: {
     extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
@@ -36,15 +27,17 @@ module.exports = {
     },
     postcss: {
       plugins: {
-        'postcss-custom-properties': false
+        "postcss-custom-properties": false
       }
     }
   },
   generate: {
     fallback: true
   },
-  plugins: ["~/plugins/global-components"],
   router: {
     linkActiveClass: "is-active"
+  },
+  env: {
+    apiUrl: process.env.API_URL || "http://localhost:8000"
   }
 };
