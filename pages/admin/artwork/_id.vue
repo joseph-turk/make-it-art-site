@@ -58,8 +58,13 @@ export default {
     }
   },
 
-  asyncData ({ params }) {
-    return axios.get(`${process.env.apiUrl}/artwork/single/${params.id}`)
+  asyncData ({ params, store }) {
+    return axios
+      .get(`${process.env.apiUrl}/artwork/admin/${params.id}/`, {
+        headers: {
+          'Authorization': `JWT ${store.state.auth.accessToken}`
+        },
+      })
       .then(response => {
         return {
           artwork: response.data
@@ -71,15 +76,21 @@ export default {
     handleSubmit () {
       this.loading = true
 
-      axios.patch(`${process.env.apiUrl}/artwork/single/${this.artwork.id}/`, {
-        title: this.artwork.title,
-        description: this.artwork.description,
-        price: this.artwork.price,
-        is_sold: this.artwork.is_sold
-      })
+      axios
+        .patch(`${process.env.apiUrl}/artwork/admin/${this.artwork.id}/`,{
+          title: this.artwork.title,
+          description: this.artwork.description,
+          price: this.artwork.price,
+          is_sold: this.artwork.is_sold
+        }, {
+          headers: {
+            'Authorization': `JWT ${this.$store.state.auth.accessToken}`
+          }
+        })
         .then(() => {
           this.loading = false
-          this.showNotification = true
+          // this.showNotification = true
+          this.$router.push('/admin/artwork')
         })
         .catch(err => console.log(err))
     }
@@ -94,5 +105,9 @@ form {
 
 .field {
   margin-bottom: 1rem;
+}
+
+.notification {
+  margin: 1rem auto;
 }
 </style>

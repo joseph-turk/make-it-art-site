@@ -3,7 +3,7 @@
     <figure class="image is-square">
       <nuxt-link :to="`/by-rose/${artworkID}`">
         <img :src="imgSrc">
-        <div class="overlay is-size-4 is-bold" @click="toggleModal">{{ title }}</div>
+        <div class="overlay is-size-4 is-bold">{{ title }}</div>
       </nuxt-link>
     </figure>
   </div>

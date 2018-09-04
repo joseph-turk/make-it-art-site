@@ -58,7 +58,7 @@ import axios from 'axios'
 
 export default {
   asyncData ({ params }) {
-    return axios.get(`${process.env.apiUrl}/artwork/single/${params.id}`)
+    return axios.get(`${process.env.apiUrl}/artwork/${params.id}`)
       .then(response => {
         return {
           artwork: response.data

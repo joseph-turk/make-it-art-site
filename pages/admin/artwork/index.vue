@@ -1,10 +1,16 @@
 <template>
   <div>
+    <section class="hero is-dark">
+      <div class="hero-body">
+        <div class="container">
+          <h2 class="title is-2">Artwork</h2>
+          <h3 class="subtitle is-3">This is where you will manage your artwork for sale</h3>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
-        <h2 class="title is-2">Artwork</h2>
-        <h3 class="subtitle is-3">This is where you will manage your artwork for sale</h3>
-
         <nuxt-link to="/admin/artwork/create" class="button is-primary">Add New</nuxt-link>
 
         <table class="table is-fullwidth">
@@ -45,7 +51,12 @@ export default {
   },
 
   created () {
-    axios.get(`${process.env.apiUrl}/artwork/list/`)
+    axios
+      .get(`${process.env.apiUrl}/artwork/admin/`, {
+        headers: {
+          'Authorization': `JWT ${this.$store.state.auth.accessToken}`
+        }
+      })
       .then(response => {
           this.artwork = response.data
       })

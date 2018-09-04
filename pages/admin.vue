@@ -1,33 +1,13 @@
 <template>
   <div>
-    <section class="hero is-light">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title is-1">Admin</h1>
-        </div>
-      </div>
-    </section>
-
-    <div class="container">
-      <nav class="buttons">
-        <nuxt-link
-          v-for="link in links"
-          :key="link.path"
-          :to="link.path"
-          class="button"
-        >
-          {{ link.title }}
-        </nuxt-link>
-        
-      </nav>
-    </div>
-
     <nuxt-child />
   </div>
 </template>
 
 <script>
 export default {
+  middleware: 'authenticated',
+  layout: 'admin',
   data () {
     return {
       links: [
@@ -52,7 +32,6 @@ export default {
   }
 }
 </script>
-
 
 <style scoped>
 nav {

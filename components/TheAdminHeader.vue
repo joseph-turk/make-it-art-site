@@ -1,13 +1,13 @@
 <template>
   <header>
     <nav
-      class="navbar is-fixed-top is-light"
+      class="navbar is-fixed-top is-dark"
       role="navigation"
       aria-label="main navigation"
     >
       <div class="container">
         <div class="navbar-brand">
-          <nuxt-link exact class="navbar-item" to="/">
+          <nuxt-link exact class="navbar-item" to="/admin">
             Make it Art
           </nuxt-link>
 
@@ -44,10 +44,11 @@
             class="navbar-end"
           >
             <nuxt-link
-              to="/admin"
+              exact
               class="navbar-item"
+              to="/"
             >
-              Admin
+              View Site
             </nuxt-link>
             <div class="navbar-item">
               <div class="field is-grouped">
@@ -77,20 +78,20 @@ export default {
       isOpen: false,
       links: [
         {
-          path: '/in-the-classroom',
-          title: 'In the Classroom'
+          path: '/admin/lessons',
+          title: 'Lessons'
         },
         {
-          path: '/together',
-          title: 'Together'
+          path: '/admin/events',
+          title: 'Events'
         },
         {
-          path: '/at-home',
-          title: 'At Home'
+          path: '/admin/projects',
+          title: 'Projects'
         },
         {
-          path: '/by-rose',
-          title: 'Made by Rose'
+          path: '/admin/artwork',
+          title: 'Artwork'
         }
       ]
     }
