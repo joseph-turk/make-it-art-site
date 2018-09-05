@@ -23,7 +23,7 @@
             :artworkID="piece.id"
           />
 
-          <p v-else>
+          <p v-if="forSale.length === 0">
             No artwork currently for sale.
           </p>
         </div>
@@ -43,7 +43,7 @@
             :artworkID="piece.id"
           />
 
-          <p v-else>
+          <p v-if="recentlySold.length === 0">
             No recently sold artwork.
           </p>
         </div>
