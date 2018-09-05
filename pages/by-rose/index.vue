@@ -15,12 +15,17 @@
 
         <div class="columns is-mobile">
           <artwork-preview
+            v-if="forSale.length > 0"
             v-for="piece in forSale"
             :key="piece.id"
             :imgSrc="piece.image"
             :title="piece.title"
             :artworkID="piece.id"
           />
+
+          <p v-else>
+            No artwork currently for sale.
+          </p>
         </div>
       </div>
     </section>
@@ -30,12 +35,17 @@
         <h2 class="title is-3">Recently Sold</h2>
         <div class="columns is-mobile">
           <artwork-preview
+            v-if="recentlySold.length > 0"
             v-for="piece in recentlySold"
             :key="piece.id"
             :imgSrc="piece.image"
             :title="piece.title"
             :artworkID="piece.id"
           />
+
+          <p v-else>
+            No recently sold artwork.
+          </p>
         </div>
       </div>
     </section>
