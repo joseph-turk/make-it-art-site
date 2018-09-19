@@ -23,9 +23,11 @@
             :artworkID="piece.id"
           />
 
-          <p v-if="forSale.length === 0">
-            No artwork currently for sale.
-          </p>
+          <div class="column">
+            <p v-if="forSale.length === 0">
+              No artwork currently for sale.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -43,9 +45,11 @@
             :artworkID="piece.id"
           />
 
-          <p v-if="recentlySold.length === 0">
-            No recently sold artwork.
-          </p>
+          <div class="column">
+            <p v-if="recentlySold.length === 0">
+              No recently sold artwork.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -53,27 +57,26 @@
 </template>
 
 <script>
-import axios from 'axios'
-import ArtworkPreview from '~/components/ArtworkPreview.vue'
+import axios from "axios";
+import ArtworkPreview from "~/components/ArtworkPreview.vue";
 
 export default {
   components: {
     ArtworkPreview
   },
 
-  created () {
-    axios.get(`${process.env.apiUrl}/artwork/`)
-      .then(response => {
-        this.forSale = response.data.filter(artwork => !artwork.is_sold)
-        this.recentlySold = response.data.filter(artwork => artwork.is_sold)
-      })
+  created() {
+    axios.get(`${process.env.apiUrl}/artwork/`).then(response => {
+      this.forSale = response.data.filter(artwork => !artwork.is_sold);
+      this.recentlySold = response.data.filter(artwork => artwork.is_sold);
+    });
   },
 
-  data () {
+  data() {
     return {
       forSale: [],
       recentlySold: []
-    }
+    };
   }
-}
+};
 </script>
