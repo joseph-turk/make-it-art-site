@@ -73,7 +73,7 @@
               <div class="card-content">
                 <div class="content">
                   <h4>Event Title</h4>
-                  
+
                   <p>Description of the next event.</p>
                 </div>
               </div>
@@ -93,7 +93,7 @@
               <div class="card-content">
                 <div class="content">
                   <h4>Project Title</h4>
-                  
+
                   <p>Description of the project.</p>
                 </div>
               </div>

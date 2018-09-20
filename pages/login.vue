@@ -8,11 +8,11 @@
 
             <form @submit.prevent="logIn">
               <div class="field">
-                <input class="input" type="text" placeholder="Username" v-model="username">
+                <input v-focus id="username" class="input" type="text" placeholder="Username" v-model="username">
               </div>
 
               <div class="field">
-                <input class="input" type="password" placeholder="Password" v-model="password">
+                <input id="password" class="input" type="password" placeholder="Password" v-model="password">
               </div>
 
               <button class="button is-primary">Log In</button>
@@ -30,9 +30,8 @@
 </template>
 
 <script>
-const Cookie = process.browser ? require('js-cookie') : undefined
 import axios from 'axios'
-import { mapMutations } from 'vuex'
+const Cookie = process.browser ? require('js-cookie') : undefined
 
 export default {
   middleware: 'notAuthenticated',
@@ -44,7 +43,9 @@ export default {
     }
   },
   computed: {
-    token () { return this.$store.state.token }
+    token () {
+      return this.$store.state.token
+    }
   },
   methods: {
     logIn () {
@@ -60,7 +61,9 @@ export default {
           this.$router.push('/admin')
         })
         .catch(error => {
-          this.message = 'Login failed. Make sure you have the correct username and password.'
+          console.log(error)
+          this.message =
+            'Login failed. Make sure you have the correct username and password.'
         })
     }
   }

@@ -57,26 +57,26 @@
 </template>
 
 <script>
-import axios from "axios";
-import ArtworkPreview from "~/components/ArtworkPreview.vue";
+import axios from 'axios'
+import ArtworkPreview from '~/components/ArtworkPreview.vue'
 
 export default {
   components: {
     ArtworkPreview
   },
 
-  created() {
+  created () {
     axios.get(`${process.env.apiUrl}/artwork/`).then(response => {
-      this.forSale = response.data.filter(artwork => !artwork.is_sold);
-      this.recentlySold = response.data.filter(artwork => artwork.is_sold);
-    });
+      this.forSale = response.data.filter(artwork => !artwork.is_sold)
+      this.recentlySold = response.data.filter(artwork => artwork.is_sold)
+    })
   },
 
-  data() {
+  data () {
     return {
       forSale: [],
       recentlySold: []
-    };
+    }
   }
-};
+}
 </script>

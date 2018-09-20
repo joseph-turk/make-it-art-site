@@ -54,11 +54,11 @@ export default {
     axios
       .get(`${process.env.apiUrl}/artwork/admin/`, {
         headers: {
-          'Authorization': `JWT ${this.$store.state.auth.accessToken}`
+          Authorization: `JWT ${this.$store.state.auth.accessToken}`
         }
       })
       .then(response => {
-          this.artwork = response.data
+        this.artwork = response.data
       })
   }
 }

@@ -30,19 +30,19 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  asyncData({ params }) {
+  asyncData ({ params }) {
     return axios
       .get(`${process.env.apiUrl}/events/${params.id}/`)
       .then(response => {
         return {
           event: response.data
-        };
-      });
+        }
+      })
   }
-};
+}
 </script>
 
 <style scoped>

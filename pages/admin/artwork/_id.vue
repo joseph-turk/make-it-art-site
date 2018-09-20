@@ -63,7 +63,7 @@ export default {
       .get(`${process.env.apiUrl}/artwork/admin/${params.id}/`, {
         headers: {
           'Authorization': `JWT ${store.state.auth.accessToken}`
-        },
+        }
       })
       .then(response => {
         return {
@@ -77,7 +77,7 @@ export default {
       this.loading = true
 
       axios
-        .patch(`${process.env.apiUrl}/artwork/admin/${this.artwork.id}/`,{
+        .patch(`${process.env.apiUrl}/artwork/admin/${this.artwork.id}/`, {
           title: this.artwork.title,
           description: this.artwork.description,
           price: this.artwork.price,

@@ -23,7 +23,7 @@
               <th>Full?</th>
             </tr>
           </thead>
-          
+
           <tbody>
             <tr
               v-for="event in events"
@@ -46,13 +46,13 @@
 import axios from 'axios'
 
 export default {
-  data() {
+  data () {
     return {
       events: []
     }
   },
 
-  created() {
+  created () {
     axios
       .get(`${process.env.apiUrl}/events/admin/`, {
         headers: {

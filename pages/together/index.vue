@@ -29,24 +29,24 @@
 </template>
 
 <script>
-import axios from "axios";
-import EventPreview from "~/components/EventPreview.vue";
+import axios from 'axios'
+import EventPreview from '~/components/EventPreview.vue'
 
 export default {
   components: {
     EventPreview
   },
 
-  created() {
+  created () {
     axios.get(`${process.env.apiUrl}/events/`).then(response => {
-      this.events = response.data;
-    });
+      this.events = response.data
+    })
   },
 
-  data() {
+  data () {
     return {
       events: []
-    };
+    }
   }
-};
+}
 </script>

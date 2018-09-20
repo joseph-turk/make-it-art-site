@@ -32,5 +32,5 @@ export default {
     eventID: Number,
     graphicSrc: String
   }
-};
+}
 </script>
