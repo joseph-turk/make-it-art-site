@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Sacramento");
+@import url('https://fonts.googleapis.com/css?family=Sacramento');
 
 .page-enter-active,
 .page-leave-active {
@@ -9,6 +9,10 @@
   opacity: 0;
 }
 
-.columns.is-mobile {
+/* .columns.is-mobile {
   flex-wrap: wrap;
+} */
+
+.form-buttons *:not(:last-child) {
+  margin-right: 0.5rem;
 }

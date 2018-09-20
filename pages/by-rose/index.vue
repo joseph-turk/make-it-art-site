@@ -13,7 +13,7 @@
       <div class="container">
         <h2 class="title is-3">Currently For Sale</h2>
 
-        <div class="columns is-mobile">
+        <div class="columns is-mobile is-multiline">
           <artwork-preview
             v-if="forSale.length > 0"
             v-for="piece in forSale"

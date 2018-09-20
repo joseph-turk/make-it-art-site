@@ -6,6 +6,8 @@
           <div class="column is-half">
             <h2 class="title is-2">Add New Event</h2>
 
+            <hr>
+
             <form @submit.prevent="handleSubmit">
               <div class="field">
                 <label for="eventName" class="label">Name</label>
@@ -24,12 +26,12 @@
 
               <div class="field">
                 <label for="eventStart" class="label">Start Time</label>
-                <input type="datetime" name="eventStart" class="input" v-model="startTime">
+                <input type="datetime" name="eventStart" class="input" placeholder="hh:mm" v-model="startTime">
               </div>
 
               <div class="field">
                 <label for="eventEnd" class="label">End Time</label>
-                <input type="datetime" name="eventEnd" class="input" v-model="endTime">
+                <input type="datetime" name="eventEnd" class="input" placeholder="hh:mm" v-model="endTime">
               </div>
 
               <div class="field">
@@ -56,9 +58,11 @@
                 </div>
               </div>
 
-              <div class="field">
+              <hr>
+
+              <div class="field form-buttons">
                 <button type="submit" class="button is-primary">Create Event</button>
-                <nuxt-link to="/admin/events" class="button">Cancel</nuxt-link>
+                <nuxt-link to="/admin/events" class="button is-light">Cancel</nuxt-link>
               </div>
             </form>
           </div>

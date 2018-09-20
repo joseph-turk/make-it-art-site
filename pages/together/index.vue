@@ -13,7 +13,7 @@
       <div class="container">
         <h2 class="title is-3">Upcoming Events</h2>
 
-        <div class="columns">
+        <div class="columns is-multiline">
           <event-preview
             v-for="event in events"
             :key="event.id"
