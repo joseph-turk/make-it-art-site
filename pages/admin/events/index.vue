@@ -13,6 +13,10 @@
       <div class="container">
         <nuxt-link to="/admin/events/create" class="button is-primary">Add New Event</nuxt-link>
 
+        <hr>
+
+        <h3 class="title">Upcoming Events</h3>
+
         <table class="table is-fullwidth">
           <thead>
             <tr>
@@ -37,6 +41,36 @@
             </tr>
           </tbody>
         </table>
+
+        <hr>
+
+        <h3 class="title">Past Events</h3>
+
+        <table class="table is-fullwidth" v-if="pastEvents.length > 0">
+          <thead>
+            <tr>
+              <th style="width: 100px"></th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Capacity</th>
+              <th>Full?</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              v-for="event in pastEvents"
+              :key="event.id"
+            >
+              <td><nuxt-link :to="`/admin/events/${event.id}`" class="button">Edit</nuxt-link></td>
+              <td>{{ event.name }}</td>
+              <td>{{ event.date }}</td>
+              <td>{{ event.capacity }}</td>
+              <td>{{ event.is_full ? '&#10004;' : '' }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p v-else>There are no past events.</p>
       </div>
     </section>
   </div>
@@ -48,20 +82,40 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      events: []
+      events: [],
+      pastEvents: []
     }
   },
 
   created () {
-    axios
-      .get(`${process.env.apiUrl}/events/admin/`, {
-        headers: {
-          Authorization: `JWT ${this.$store.state.auth.accessToken}`
-        }
-      })
-      .then(response => {
-        this.events = response.data
-      })
+    this.fetchUpcomingEvents()
+    this.fetchPastEvents()
+  },
+
+  methods: {
+    fetchUpcomingEvents () {
+      axios
+        .get(`${process.env.apiUrl}/events/admin/`, {
+          headers: {
+            Authorization: `JWT ${this.$store.state.auth.accessToken}`
+          }
+        })
+        .then(response => {
+          this.events = response.data
+        })
+    },
+
+    fetchPastEvents () {
+      axios
+        .get(`${process.env.apiUrl}/events/admin/past/`, {
+          headers: {
+            Authorization: `JWT ${this.$store.state.auth.accessToken}`
+          }
+        })
+        .then(response => {
+          this.pastEvents = response.data
+        })
+    }
   }
 }
 </script>
