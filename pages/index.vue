@@ -65,22 +65,30 @@
 
         <div class="columns">
           <div class="column">
-            <div class="card">
+            <div class="card" v-if="event">
               <header class="card-header">
                 <h3 class="card-header-title is-size-4">Next Event</h3>
               </header>
 
               <div class="card-content">
                 <div class="content">
-                  <h4>Event Title</h4>
+                  <h4>{{ event.name }}</h4>
 
-                  <p>Description of the next event.</p>
+                  <p>{{ event.description }}</p>
                 </div>
               </div>
 
               <footer class="card-footer">
-                <nuxt-link class="card-footer-item is-size-5" to="/">Sign Up</nuxt-link>
+                <nuxt-link class="card-footer-item is-size-5" :to="`/together/${event.id}`">Sign Up</nuxt-link>
               </footer>
+            </div>
+
+            <div class="card" v-else>
+              <div class="card-content">
+                <div class="content">
+                  <h4>There are currently no upcoming events.</h4>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -108,6 +116,20 @@
     </section>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  async asyncData () {
+    let { data } = await axios.get(`${process.env.apiUrl}/events/`)
+
+    return {
+      event: data[0]
+    }
+  }
+}
+</script>
 
 <style scoped>
 .welcome-container {
