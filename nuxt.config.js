@@ -40,5 +40,5 @@ module.exports = {
   env: {
     apiUrl: process.env.API_URL || 'http://localhost:8000'
   },
-  plugins: ['~/plugins/directives.js']
+  plugins: ['~/plugins/directives.js', '~/plugins/global-components.js']
 }

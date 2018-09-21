@@ -1,8 +1,8 @@
-import Vue from "vue";
-import AppContainer from "~/components/AppContainer.vue";
+import Vue from 'vue'
+import TimePicker from '~/components/TimePicker.vue'
 
-const components = { AppContainer };
+const components = { TimePicker }
 
 Object.entries(components).forEach(([name, component]) => {
-  Vue.component(name, component);
-});
+  Vue.component(name, component)
+})
