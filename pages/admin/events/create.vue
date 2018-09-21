@@ -26,12 +26,12 @@
 
               <div class="field">
                 <label for="eventStart" class="label">Start Time</label>
-                <input type="datetime" name="eventStart" class="input" placeholder="hh:mm" v-model="startTime">
+                <time-picker inputClass="input" selectClass="select" ref="startTime" />
               </div>
 
               <div class="field">
                 <label for="eventEnd" class="label">End Time</label>
-                <input type="datetime" name="eventEnd" class="input" placeholder="hh:mm" v-model="endTime">
+                <time-picker inputClass="input" selectClass="select" ref="endTime" />
               </div>
 
               <div class="field">
@@ -61,7 +61,13 @@
               <hr>
 
               <div class="field form-buttons">
-                <button type="submit" class="button is-primary">Create Event</button>
+                <button
+                  type="submit"
+                  class="button is-primary"
+                  :class="{'is-loading': createIsLoading}"
+                >
+                  Create Event
+                </button>
                 <nuxt-link to="/admin/events" class="button is-light">Cancel</nuxt-link>
               </div>
             </form>
@@ -85,7 +91,8 @@ export default {
       date: null,
       startTime: null,
       endTime: null,
-      capacity: null
+      capacity: null,
+      createIsLoading: false
     }
   },
 
@@ -96,13 +103,15 @@ export default {
     },
 
     handleSubmit () {
+      this.createIsLoading = true
+
       let formData = new FormData()
       formData.append('graphic', this.file)
       formData.append('name', this.name)
       formData.append('description', this.description)
       formData.append('date', this.date)
-      formData.append('time_start', this.startTime)
-      formData.append('time_end', this.endTime)
+      formData.append('time_start', this.$refs.startTime.calculatedTime)
+      formData.append('time_end', this.$refs.endTime.calculatedTime)
       formData.append('capacity', this.capacity)
       formData.append('is_full', false)
 
@@ -118,6 +127,7 @@ export default {
         })
         .catch(err => {
           console.log(`Error: ${err}`)
+          this.createIsLoading = false
         })
     }
   }
