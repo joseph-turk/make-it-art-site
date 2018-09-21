@@ -19,20 +19,27 @@
 
         <div class="description is-size-4">{{ event.description }}</div>
 
-        <nuxt-link class="button is-primary" :to="`/together/${event.id}/register/`">Register</nuxt-link>
+        <button type="button" class="button is-primary" @click="toggleModal">Register</button>
 
         <hr>
 
         <nuxt-link to="/together">Back to All Events</nuxt-link>
       </div>
     </section>
+
+    <event-register-modal :showModal="showModal" @toggleModal="toggleModal" />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import EventRegisterModal from '~/components/EventRegisterModal.vue'
 
 export default {
+  components: {
+    EventRegisterModal
+  },
+
   asyncData ({ params }) {
     return axios
       .get(`${process.env.apiUrl}/events/${params.id}/`)
@@ -41,6 +48,18 @@ export default {
           event: response.data
         }
       })
+  },
+
+  data () {
+    return {
+      showModal: false
+    }
+  },
+
+  methods: {
+    toggleModal () {
+      this.showModal = !this.showModal
+    }
   }
 }
 </script>
