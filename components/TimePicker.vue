@@ -39,6 +39,31 @@ export default {
     selectClass: {
       type: String,
       required: true
+    },
+    defaultTime: {
+      type: String,
+      required: false
+    }
+  },
+
+  created () {
+    if (this.defaultTime) {
+      this.hours = this.defaultTime.slice(0, 2)
+      this.minutes = this.defaultTime.slice(3, 5)
+
+      if (this.hours >= 12) {
+        this.amPm = 'PM'
+
+        if (this.hours > 12) {
+          this.hours = parseInt(this.hours) - 12
+        }
+
+        if (this.hours < 10) {
+          this.hours = '0' + this.hours.toString()
+        } else {
+          this.hours = this.hours.toString()
+        }
+      }
     }
   },
 

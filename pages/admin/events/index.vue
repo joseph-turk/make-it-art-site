@@ -17,12 +17,13 @@
 
         <h3 class="title">Upcoming Events</h3>
 
-        <table class="table is-fullwidth">
+        <table class="table is-fullwidth" v-if="events.length > 0">
           <thead>
             <tr>
               <th style="width: 100px"></th>
               <th>Name</th>
               <th>Date</th>
+              <th>Time</th>
               <th>Capacity</th>
               <th>Full?</th>
             </tr>
@@ -36,11 +37,17 @@
               <td><nuxt-link :to="`/admin/events/${event.id}`" class="button">Edit</nuxt-link></td>
               <td>{{ event.name }}</td>
               <td>{{ event.date }}</td>
+              <td>
+                {{ formatTime(event.time_start) }}&ndash;
+                {{ formatTime(event.time_end) }}
+              </td>
               <td>{{ event.capacity }}</td>
               <td>{{ event.is_full ? '&#10004;' : '' }}</td>
             </tr>
           </tbody>
         </table>
+
+        <p v-else>There are no upcoming events.</p>
 
         <hr>
 
@@ -52,6 +59,7 @@
               <th style="width: 100px"></th>
               <th>Name</th>
               <th>Date</th>
+              <th>Time</th>
               <th>Capacity</th>
               <th>Full?</th>
             </tr>
@@ -65,6 +73,10 @@
               <td><nuxt-link :to="`/admin/events/${event.id}`" class="button">Edit</nuxt-link></td>
               <td>{{ event.name }}</td>
               <td>{{ event.date }}</td>
+              <td>
+                {{ formatTime(event.time_start) }}&ndash;
+                {{ formatTime(event.time_end) }}
+              </td>
               <td>{{ event.capacity }}</td>
               <td>{{ event.is_full ? '&#10004;' : '' }}</td>
             </tr>
@@ -78,6 +90,7 @@
 
 <script>
 import axios from 'axios'
+import { formatTime } from '~/utilities/dateHelpers.js'
 
 export default {
   data () {
@@ -115,6 +128,10 @@ export default {
         .then(response => {
           this.pastEvents = response.data
         })
+    },
+
+    formatTime (time) {
+      return formatTime(time)
     }
   }
 }
