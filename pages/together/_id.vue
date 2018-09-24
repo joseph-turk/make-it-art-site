@@ -31,7 +31,11 @@
       </div>
     </section>
 
-    <event-register-modal :showModal="showModal" @toggleModal="toggleModal" />
+    <event-register-modal
+      :showModal="showModal"
+      :event="event"
+      @toggleModal="toggleModal"
+    />
   </div>
 </template>
 
