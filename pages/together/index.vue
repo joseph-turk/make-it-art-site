@@ -11,17 +11,19 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="title is-3">Upcoming Events</h2>
+        <div class="columns is-centered">
+          <div class="column is-two-thirds-desktop">
+            <h2 class="title is-3">Upcoming Events</h2>
 
-        <div class="columns is-multiline">
-          <event-preview
-            v-for="event in events"
-            :key="event.id"
-            :name="event.name"
-            :eventID="event.id"
-            :graphicSrc="event.graphic"
-            :date="event.date"
-          />
+            <event-preview
+              v-for="event in events"
+              :key="event.id"
+              :name="event.name"
+              :eventID="event.id"
+              :graphicSrc="event.graphic"
+              :date="event.date"
+            />
+          </div>
         </div>
       </div>
     </section>
