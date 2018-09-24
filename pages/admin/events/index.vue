@@ -20,12 +20,12 @@
         <table class="table is-fullwidth" v-if="events.length > 0">
           <thead>
             <tr>
-              <th style="width: 100px"></th>
               <th>Name</th>
               <th>Date</th>
               <th>Time</th>
               <th>Capacity</th>
               <th>Full?</th>
+              <th style="width: 160px"></th>
             </tr>
           </thead>
 
@@ -34,7 +34,6 @@
               v-for="event in events"
               :key="event.id"
             >
-              <td><nuxt-link :to="`/admin/events/${event.id}`" class="button">Edit</nuxt-link></td>
               <td>{{ event.name }}</td>
               <td>{{ event.date }}</td>
               <td>
@@ -43,6 +42,10 @@
               </td>
               <td>{{ event.capacity }}</td>
               <td>{{ event.is_full ? '&#10004;' : '' }}</td>
+              <td class="table-actions">
+                <nuxt-link :to="`/admin/events/${event.id}`" class="button is-link">Details</nuxt-link>
+                <nuxt-link :to="`/admin/events/${event.id}/edit`" class="button is-light">Edit</nuxt-link>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -136,3 +139,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.table-actions {
+  white-space: nowrap;
+}
+
+.table-actions *:not(:last-child) {
+  margin-right: 0.5rem;
+}
+</style>
