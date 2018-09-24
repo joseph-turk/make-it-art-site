@@ -83,9 +83,11 @@ export default {
           this.registration.name = ''
           this.registration.email = ''
           this.$emit('toggleModal')
+          this.$store.commit('setNotification', 'You have been successfully registered')
         })
         .catch(error => {
           this.submitIsLoading = false
+          this.$store.commit('setNotification', 'Sorry, your registration was unsuccessful')
           throw error
         })
     }

@@ -10,7 +10,15 @@
           </div>
 
           <div class="column event-info">
-            <h1 class="title is-2">{{ event.name }}</h1>
+            <h1 class="title is-2">
+              {{ event.name }}
+              <span
+                v-if="event.is_full"
+                class="has-text-danger"
+              >
+                (Wait List)
+              </span>
+            </h1>
             <h2 class="subtitle is-3">
               {{ formatDate(event.date) }}<br>
               ({{ formatTime(event.time_start) }}&ndash;
