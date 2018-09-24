@@ -11,7 +11,11 @@
 
           <div class="column event-info">
             <h1 class="title is-2">{{ event.name }}</h1>
-            <h2 class="subtitle is-3">{{ event.date }}<br>({{ event.time_start }}&ndash;{{ event.time_end }})</h2>
+            <h2 class="subtitle is-3">
+              {{ formatDate(event.date) }}<br>
+              ({{ formatTime(event.time_start) }}&ndash;
+              {{ formatTime(event.time_end) }})
+            </h2>
           </div>
         </div>
 
@@ -33,6 +37,7 @@
 
 <script>
 import axios from 'axios'
+import { formatDate, formatTime } from '~/utilities/dateHelpers'
 import EventRegisterModal from '~/components/EventRegisterModal.vue'
 
 export default {
@@ -59,6 +64,14 @@ export default {
   methods: {
     toggleModal () {
       this.showModal = !this.showModal
+    },
+
+    formatDate (date) {
+      return formatDate(date)
+    },
+
+    formatTime (time) {
+      return formatTime(time)
     }
   }
 }

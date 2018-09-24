@@ -8,7 +8,7 @@
 
     <div class="card-content">
       <h3 class="title">{{ name }}</h3>
-      <h4 class="subtitle">{{ date }}</h4>
+      <h4 class="subtitle">{{ formatDate(date) }}</h4>
     </div>
 
     <div class="card-footer">
@@ -23,12 +23,20 @@
 </template>
 
 <script>
+import { formatDate } from '~/utilities/dateHelpers'
+
 export default {
   props: {
     name: String,
     date: String,
     eventID: Number,
     graphicSrc: String
+  },
+
+  methods: {
+    formatDate (date) {
+      return formatDate(date)
+    }
   }
 }
 </script>
