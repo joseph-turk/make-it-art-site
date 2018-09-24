@@ -10,14 +10,25 @@
           </div>
 
           <div class="column event-info">
-            <h1 class="title is-2">{{ event.name }}</h1>
+            <h1 class="title is-2">
+              {{ event.name }}
+              <span v-if="event.is_full">
+                (Full)
+              </span>
+            </h1>
             <h2 class="subtitle is-3">
               {{ formatDate(event.date) }}<br>
               ({{ formatTime(event.time_start) }}&ndash;
               {{ formatTime(event.time_end) }})
             </h2>
 
-            <nuxt-link :to="`/admin/events/${event.id}/edit`" class="button is-primary" @click="toggleModal">Edit Event</nuxt-link>
+            <nuxt-link
+              :to="`/admin/events/${event.id}/edit`"
+              class="button is-primary"
+              @click="toggleModal"
+            >
+              Edit Event
+            </nuxt-link>
           </div>
         </div>
 

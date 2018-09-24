@@ -67,7 +67,7 @@ import axios from 'axios'
 export default {
   async asyncData ({ params, store }) {
     return axios
-      .get(`${process.env.apiUrl}/events/admin/registrations/${params.id}/`, {
+      .get(`${process.env.apiUrl}/events/admin/registrations/${params.registrationId}/`, {
         headers: {
           'Authorization': `JWT ${store.state.auth.accessToken}`
         }
