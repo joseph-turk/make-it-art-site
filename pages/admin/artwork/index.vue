@@ -11,15 +11,23 @@
 
     <section class="section">
       <div class="container">
-        <nuxt-link to="/admin/artwork/create" class="button is-primary">Add New</nuxt-link>
+        <nuxt-link
+          to="/admin/artwork/create"
+          class="button is-primary"
+        >
+          Add New
+        </nuxt-link>
 
-        <table class="table is-fullwidth">
+        <table
+          class="table is-fullwidth"
+          v-if="artwork.length > 0"
+        >
             <thead>
               <tr>
-                <th style="width: 100px"></th>
                 <th>Title</th>
                 <th>Price</th>
                 <th>Sold?</th>
+                <th style="width: 100px"></th>
               </tr>
             </thead>
 
@@ -28,13 +36,24 @@
                 v-for="piece in artwork"
                 :key="piece.id"
               >
-                <td><nuxt-link :to="`/admin/artwork/${piece.id}`" class="button">Edit</nuxt-link></td>
                 <td>{{ piece.title }}</td>
-                <td>{{ piece.price }}</td>
+                <td>${{ piece.price }}</td>
                 <td>{{ piece.is_sold ? '&#10004;' : '' }}</td>
+                <td>
+                  <nuxt-link
+                    :to="`/admin/artwork/${piece.id}/edit`"
+                    class="button is-light"
+                  >
+                    Edit
+                  </nuxt-link>
+                </td>
               </tr>
             </tbody>
           </table>
+
+          <div v-else>
+            <p>There is currently no artwork for sale</p>
+          </div>
       </div>
     </section>
   </div>
