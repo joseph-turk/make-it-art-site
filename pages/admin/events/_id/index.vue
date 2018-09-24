@@ -11,7 +11,13 @@
 
           <div class="column event-info">
             <h1 class="title is-2">{{ event.name }}</h1>
-            <h2 class="subtitle is-3">{{ event.date }}<br>({{ event.time_start }}&ndash;{{ event.time_end }})</h2>
+            <h2 class="subtitle is-3">
+              {{ formatDate(event.date) }}<br>
+              ({{ formatTime(event.time_start) }}&ndash;
+              {{ formatTime(event.time_end) }})
+            </h2>
+
+            <nuxt-link :to="`/admin/events/${event.id}/edit`" class="button is-primary" @click="toggleModal">Edit Event</nuxt-link>
           </div>
         </div>
 
@@ -19,7 +25,81 @@
 
         <div class="description is-size-4">{{ event.description }}</div>
 
-        <nuxt-link :to="`/admin/events/${event.id}/edit`" class="button is-primary" @click="toggleModal">Edit</nuxt-link>
+        <hr>
+
+        <div class="columns">
+          <div class="column">
+            <h2 class="title">Registered</h2>
+
+            <div v-if="getRegistrations(event).length > 0">
+              <table class="table is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th style="width: 100px"></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr
+                    v-for="registration in getRegistrations(event)"
+                    :key="registration.id"
+                  >
+                    <td>{{ registration.name }}</td>
+                    <td>{{ registration.email }}</td>
+                    <td>
+                      <nuxt-link
+                        :to="`/admin/events/${event.id}/registrations/${registration.id}/edit`"
+                        class="button"
+                      >
+                        Edit
+                      </nuxt-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p v-else>No one has registered for this event yet</p>
+          </div>
+
+          <div class="column">
+            <h2 class="title">Wait List</h2>
+
+            <div v-if="getWaitList(event).length > 0">
+              <table class="table is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th style="width: 100px"></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr
+                    v-for="registration in getWaitList(event)"
+                    :key="registration.id"
+                  >
+                    <td>{{ registration.name }}</td>
+                    <td>{{ registration.email }}</td>
+                    <td>
+                      <nuxt-link
+                        :to="`/admin/events/${event.id}/registrations/${registration.id}/edit`"
+                        class="button"
+                      >
+                        Edit
+                      </nuxt-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p v-else>No one is on the wait list for this event</p>
+          </div>
+        </div>
 
         <hr>
 
@@ -31,6 +111,8 @@
 
 <script>
 import axios from 'axios'
+import { formatDate, formatTime } from '~/utilities/dateHelpers'
+import { getRegistrations, getWaitList } from '~/utilities/eventHelpers'
 
 export default {
   asyncData ({ params }) {
@@ -52,6 +134,22 @@ export default {
   methods: {
     toggleModal () {
       this.showModal = !this.showModal
+    },
+
+    formatDate (date) {
+      return formatDate(date)
+    },
+
+    formatTime (time) {
+      return formatTime(time)
+    },
+
+    getRegistrations (event) {
+      return getRegistrations(event)
+    },
+
+    getWaitList (event) {
+      return getWaitList(event)
     }
   }
 }

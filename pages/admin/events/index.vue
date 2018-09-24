@@ -24,6 +24,7 @@
               <th>Date</th>
               <th>Time</th>
               <th>Capacity</th>
+              <th>Registered</th>
               <th>Full?</th>
               <th style="width: 160px"></th>
             </tr>
@@ -41,6 +42,7 @@
                 {{ formatTime(event.time_end) }}
               </td>
               <td>{{ event.capacity }}</td>
+              <td>{{ event.registrations.length }}</td>
               <td>{{ event.is_full ? '&#10004;' : '' }}</td>
               <td class="table-actions">
                 <nuxt-link :to="`/admin/events/${event.id}`" class="button is-link">Details</nuxt-link>
@@ -59,12 +61,13 @@
         <table class="table is-fullwidth" v-if="pastEvents.length > 0">
           <thead>
             <tr>
-              <th style="width: 100px"></th>
               <th>Name</th>
               <th>Date</th>
               <th>Time</th>
               <th>Capacity</th>
+              <th>Registered</th>
               <th>Full?</th>
+              <th style="width: 160px"></th>
             </tr>
           </thead>
 
@@ -73,7 +76,6 @@
               v-for="event in pastEvents"
               :key="event.id"
             >
-              <td><nuxt-link :to="`/admin/events/${event.id}`" class="button">Edit</nuxt-link></td>
               <td>{{ event.name }}</td>
               <td>{{ event.date }}</td>
               <td>
@@ -81,7 +83,11 @@
                 {{ formatTime(event.time_end) }}
               </td>
               <td>{{ event.capacity }}</td>
+              <td>{{ event.registrations.length }}</td>
               <td>{{ event.is_full ? '&#10004;' : '' }}</td>
+              <td>
+                <nuxt-link :to="`/admin/events/${event.id}`" class="button is-link">Details</nuxt-link>
+              </td>
             </tr>
           </tbody>
         </table>

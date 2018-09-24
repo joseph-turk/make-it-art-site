@@ -68,6 +68,13 @@
                 </div>
               </div>
 
+              <div class="field">
+                <label class="checkbox">
+                  <input type="checkbox" v-model="event.is_full">
+                  Full?
+                </label>
+              </div>
+
               <hr>
 
               <div class="field form-buttons">
@@ -133,7 +140,7 @@ export default {
       formData.append('time_start', this.$refs.startTime.calculatedTime)
       formData.append('time_end', this.$refs.endTime.calculatedTime)
       formData.append('capacity', this.event.capacity)
-      formData.append('is_full', false)
+      formData.append('is_full', this.event.is_full)
 
       axios
         .patch(`${process.env.apiUrl}/events/admin/${this.event.id}/`, formData, {
@@ -145,9 +152,9 @@ export default {
         .then(response => {
           this.$router.push('/admin/events')
         })
-        .catch(err => {
-          console.log(`Error: ${err}`)
+        .catch(error => {
           this.createIsLoading = false
+          throw error
         })
     }
   }
