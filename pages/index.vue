@@ -65,35 +65,31 @@
 
         <div class="columns">
           <div class="column">
-            <div class="card" v-if="event">
+            <div class="card upcoming-card">
               <header class="card-header">
                 <h3 class="card-header-title is-size-4">Next Event</h3>
               </header>
 
               <div class="card-content">
-                <div class="content">
+                <div class="content" v-if="event">
                   <h4>{{ event.name }}</h4>
 
                   <p>{{ event.description }}</p>
                 </div>
-              </div>
 
-              <footer class="card-footer">
-                <nuxt-link class="card-footer-item is-size-5" :to="`/together/${event.id}`">Sign Up</nuxt-link>
-              </footer>
-            </div>
-
-            <div class="card" v-else>
-              <div class="card-content">
-                <div class="content">
+                <div class="content" v-else>
                   <h4>There are currently no upcoming events.</h4>
                 </div>
               </div>
+
+              <footer class="card-footer" v-if="event">
+                <nuxt-link class="card-footer-item is-size-5" :to="`/together/${event.id}`">Sign Up</nuxt-link>
+              </footer>
             </div>
           </div>
 
           <div class="column">
-            <div class="card">
+            <div class="card upcoming-card">
               <header class="card-header">
                 <h3 class="card-header-title is-size-4">Latest Project</h3>
               </header>
@@ -121,12 +117,21 @@
 import axios from 'axios'
 
 export default {
-  async asyncData () {
-    let { data } = await axios.get(`${process.env.apiUrl}/events/`)
-
+  data () {
     return {
-      event: data[0]
+      event: null
     }
+  },
+
+  created () {
+    axios
+      .get(`${process.env.apiUrl}/events/`)
+      .then(response => {
+        this.event = response.data[0]
+      })
+      .catch(error => {
+        throw error
+      })
   }
 }
 </script>
@@ -134,5 +139,9 @@ export default {
 <style scoped>
 .welcome-container {
   max-width: 680px;
+}
+
+.upcoming-card {
+  height: 100%;
 }
 </style>
