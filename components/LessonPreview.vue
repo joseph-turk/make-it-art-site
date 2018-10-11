@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'LessonPreview',
   props: {
     name: String,
     tags: Array,
@@ -35,5 +36,9 @@ export default {
 <style scoped>
 span:not(:last-child):after {
   content: ", ";
+}
+
+.card {
+  margin: 1rem 0;
 }
 </style>

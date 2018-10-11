@@ -13,26 +13,38 @@
       <div class="container">
         <div class="columns is-centered">
           <div class="column is-two-thirds-desktop">
-            <div
+            <p class="is-size-5 has-text-weight-bold tags-label">Tags</p>
+            <button
               v-for="tag in tags"
               :key="`tag-${tag.id}`"
+              class="button is-link"
+              :class="{ 'is-outlined': selectedTags.indexOf(tag) < 0 }"
+              :title="tag.description"
+              @click="toggleTag(tag, $event)"
             >
-              <button
-                class="button is-link"
-                :title="tag.description">
-                {{ tag.name }}
-              </button>
-            </div>
+              {{ tag.name }}
+            </button>
 
             <hr>
 
-            <lesson-preview
-              v-for="lesson in lessons"
-              :key="`lesson-${lesson.id}`"
-              :name="lesson.name"
-              :tags="lesson.tags"
-              :lessonID="lesson.id"
-            />
+            <div v-if="selectedLessons.length > 0">
+              <transition-group name="list" tag="div">
+                <div
+                  v-for="lesson in selectedLessons"
+                  :key="`lesson-${lesson.id}`"
+                >
+                  <lesson-preview
+                    :name="lesson.name"
+                    :tags="lesson.tags"
+                    :lessonID="lesson.id"
+                  />
+                </div>
+              </transition-group>
+            </div>
+
+            <div v-else>
+              <p class="content">There are no lessons that match your criteria</p>
+            </div>
           </div>
         </div>
       </div>
@@ -51,19 +63,74 @@ export default {
 
   created () {
     axios.get(`${process.env.apiUrl}/lessons/`).then(response => {
-      this.lessons = response.data
+      this.allLessons = response.data
+      this.selectedLessons = response.data
     })
 
     axios.get(`${process.env.apiUrl}/lessons/tags/`).then(response => {
       this.tags = response.data
+      this.selectedTags = response.data
     })
   },
 
   data () {
     return {
-      lessons: [],
-      tags: []
+      allLessons: [],
+      selectedLessons: [],
+      tags: [],
+      selectedTags: []
+    }
+  },
+
+  methods: {
+    toggleTag (tag, event) {
+      if (this.selectedTags.indexOf(tag) >= 0) {
+        this.selectedTags = this.selectedTags.filter(t => t !== tag)
+      } else {
+        this.selectedTags.push(tag)
+      }
+
+      this.filterLessons()
+
+      event.target.blur()
+    },
+
+    filterLessons () {
+      this.selectedLessons = []
+
+      this.allLessons.forEach(lesson => {
+        let hasTag = false
+
+        lesson.tags.forEach(tag => {
+          this.selectedTags.forEach(t => {
+            if (tag.id === t.id) hasTag = true
+          })
+        })
+
+        if (hasTag) this.selectedLessons.push(lesson)
+      })
     }
   }
 }
 </script>
+
+<style scoped>
+p {
+  margin-bottom: 0.5rem;
+}
+
+button:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+</style>
