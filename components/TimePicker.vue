@@ -63,6 +63,14 @@ export default {
         } else {
           this.hours = this.hours.toString()
         }
+      } else {
+        this.amPm = 'AM'
+
+        if (this.hours < 10) {
+          this.hours = '0' + this.hours.toString()
+        } else {
+          this.hours = this.hours.toString()
+        }
       }
     }
   },
