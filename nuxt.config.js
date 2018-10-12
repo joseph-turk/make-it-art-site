@@ -35,7 +35,8 @@ module.exports = {
       plugins: {
         'postcss-custom-properties': false
       }
-    }
+    },
+    vendor: ['vue-select']
   },
   generate: {
     fallback: true
@@ -49,6 +50,7 @@ module.exports = {
   plugins: [
     '~/plugins/directives.js',
     '~/plugins/global-components.js',
-    { src: '~/plugins/quill-plugin.js', ssr: false }
+    { src: '~/plugins/quill-plugin.js', ssr: false },
+    { src: '~/plugins/vue-select', ssr: false }
   ]
 }

@@ -45,6 +45,11 @@
               </div>
 
               <div class="field">
+                <label class="label">Materials/Tools</label>
+                <text-editor v-model="materials" />
+              </div>
+
+              <div class="field">
                 <label
                   for="lessonProcedure"
                   class="label"
@@ -75,26 +80,33 @@
               </div>
 
               <div class="field">
+                <label class="label">Rubric</label>
+                <text-editor v-model="rubric" />
+              </div>
+
+              <div class="field">
                 <label
                   for="lessonTags"
                   class="label"
                 >
                   Tags (Select One or More)
                 </label>
-                <div class="select is-multiple">
-                  <select
-                    multiple
-                    size="5"
-                    v-model="tags"
+
+                <v-select
+                  multiple
+                  label="name"
+                  v-model="tags"
+                  :options="allTags"
+                />
+
+                <div>
+                  <button
+                    type="button"
+                    class="button is-small add-tag-button"
+                    @click="toggleModal"
                   >
-                    <option
-                      v-for="tag in allTags"
-                      :key="tag.id"
-                      :value="tag"
-                    >
-                      {{ tag.name }}
-                    </option>
-                  </select>
+                    Add New Tag
+                  </button>
                 </div>
               </div>
 
@@ -121,19 +133,26 @@
         </div>
       </div>
     </section>
+
+    <create-tag-modal
+      :showModal="showModal"
+      @toggleModal="toggleModal"
+      @updateTags="updateTags"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CreateTagModal from '~/components/CreateTagModal.vue'
 
 export default {
+  components: {
+    CreateTagModal
+  },
+
   created () {
-    axios
-      .get(`${process.env.apiUrl}/lessons/tags/`)
-      .then(response => {
-        this.allTags = response.data
-      })
+    this.updateTags()
   },
 
   data () {
@@ -142,11 +161,14 @@ export default {
       name: '',
       inspiration: '',
       outcomes: '',
+      materials: '',
       procedure: '',
       exitExpectations: '',
       finishNotes: '',
+      rubric: '',
       tags: [],
-      createIsLoading: false
+      createIsLoading: false,
+      showModal: false
     }
   },
 
@@ -160,9 +182,11 @@ export default {
             name: this.name,
             inspiration: this.inspiration,
             outcomes: this.outcomes,
+            materials: this.materials,
             procedure: this.procedure,
             exit_expectations: this.exitExpectations,
             finish_notes: this.finishNotes,
+            rubric: this.rubric,
             tags: this.tags
           },
           {
@@ -178,7 +202,29 @@ export default {
           console.log(`Error: ${err}`)
           this.createIsLoading = false
         })
+    },
+
+    toggleModal () {
+      this.showModal = !this.showModal
+    },
+
+    updateTags () {
+      axios
+        .get(`${process.env.apiUrl}/lessons/tags/`)
+        .then(response => {
+          this.allTags = response.data
+        })
     }
   }
 }
 </script>
+
+<style scoped>
+.add-tag-button {
+  margin-top: 0.5rem;
+}
+
+.dropdown {
+  display: block;
+}
+</style>

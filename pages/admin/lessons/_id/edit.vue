@@ -81,20 +81,22 @@
                 >
                   Tags (Select One or More)
                 </label>
-                <div class="select is-multiple">
-                  <select
-                    multiple
-                    size="5"
-                    v-model="lesson.tags"
+
+                <v-select
+                  multiple
+                  label="name"
+                  v-model="lesson.tags"
+                  :options="allTags"
+                />
+
+                <div>
+                  <button
+                    type="button"
+                    class="button is-small add-tag-button"
+                    @click="toggleModal"
                   >
-                    <option
-                      v-for="tag in allTags"
-                      :key="tag.id"
-                      :value="tag"
-                    >
-                      {{ tag.name }}
-                    </option>
-                  </select>
+                    Add New Tag
+                  </button>
                 </div>
               </div>
 
@@ -121,13 +123,24 @@
         </div>
       </div>
     </section>
+
+    <create-tag-modal
+      :showModal="showModal"
+      @toggleModal="toggleModal"
+      @updateTags="updateTags"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CreateTagModal from '~/components/CreateTagModal.vue'
 
 export default {
+  components: {
+    CreateTagModal
+  },
+
   asyncData ({ params, store }) {
     return axios
       .get(`${process.env.apiUrl}/lessons/admin/${params.id}/`, {
@@ -143,18 +156,15 @@ export default {
   },
 
   created () {
-    axios
-      .get(`${process.env.apiUrl}/lessons/tags/`)
-      .then(response => {
-        this.allTags = response.data
-      })
+    this.updateTags()
   },
 
   data () {
     return {
       lesson: null,
       allTags: [],
-      saveIsLoading: false
+      saveIsLoading: false,
+      showModal: false
     }
   },
 
@@ -179,7 +189,29 @@ export default {
           console.log(`Error: ${err}`)
           throw err
         })
+    },
+
+    toggleModal () {
+      this.showModal = !this.showModal
+    },
+
+    updateTags () {
+      axios
+        .get(`${process.env.apiUrl}/lessons/tags/`)
+        .then(response => {
+          this.allTags = response.data
+        })
     }
   }
 }
 </script>
+
+<style scoped>
+.add-tag-button {
+  margin-top: 0.5rem;
+}
+
+.dropdown {
+  display: block;
+}
+</style>

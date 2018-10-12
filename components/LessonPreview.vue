@@ -6,9 +6,8 @@
         <span
           v-for="tag in tags"
           :key="tag.id"
-        >
-          {{ tag.name }}
-        </span>
+          v-text="tag.name"
+        />
       </h4>
     </div>
     <div class="card-footer">

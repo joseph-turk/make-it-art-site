@@ -44,18 +44,10 @@
                 <span
                   v-for="tag in lesson.tags"
                   :key="`tag-${tag.id}`"
-                >
-                  {{ tag.name }}
-                </span>
+                  v-text="tag.name"
+                />
               </td>
               <td class="table-actions">
-                <nuxt-link
-                  :to="`/admin/lessons/${lesson.id}`"
-                  class="button is-link"
-                >
-                  Details
-                </nuxt-link>
-
                 <nuxt-link
                   :to="`/admin/lessons/${lesson.id}/edit`"
                   class="button is-light"

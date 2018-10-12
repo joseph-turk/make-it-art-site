@@ -8,27 +8,72 @@
           <span
             v-for="tag in lesson.tags"
             :key="tag.id"
-          >
-            {{ tag.name }}
-          </span>
+            v-text="tag.name"
+          />
         </h3>
 
         <hr>
 
-        <h2 class="title is-3">Inspiration</h2>
-        <div class="content" v-html="lesson.inspiration" />
+        <section class="section">
+          <div class="columns">
+            <div class="column">
+              <h2 class="title is-3">Inspiration</h2>
+              <div class="content" v-html="lesson.inspiration" />
+            </div>
 
-        <h2 class="title is-3">Outcomes</h2>
-        <div class="content" v-html="lesson.outcomes" />
+            <div class="column">
+              <h2 class="title is-3">Outcomes</h2>
+              <div class="content" v-html="lesson.outcomes" />
+            </div>
+          </div>
+        </section>
 
-        <h2 class="title is-3">Procedure</h2>
-        <div class="content" v-html="lesson.procedure" />
+        <section class="section">
+          <div class="columns">
+            <div class="column">
+              <h2 class="title is-3">Resources</h2>
+              <div class="content">TODO</div>
+            </div>
 
-        <h2 class="title is-3">Exit Expectations</h2>
-        <div class="content" v-html="lesson.exit_expectations" />
+            <div class="column">
+              <h2 class="title is-3">Materials</h2>
+              <div class="content" v-html="lesson.materials" />
+            </div>
+          </div>
+        </section>
 
-        <h2 class="title is-3">Finishing Project</h2>
-        <div class="content" v-html="lesson.finish_notes" />
+        <section class="section">
+          <div class="card">
+            <div class="card-content">
+              <h2 class="title is-3">Procedure</h2>
+              <div class="content" v-html="lesson.procedure" />
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="columns">
+            <div class="column">
+              <h2 class="title is-3">Exit Expectations</h2>
+              <div class="content" v-html="lesson.exit_expectations" />
+            </div>
+
+            <div class="column">
+              <h2 class="title is-3">Finishing Project</h2>
+              <div class="content" v-html="lesson.finish_notes" />
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="columns">
+            <div class="column">
+              <h2 class="title is-3">Rubric</h2>
+              <div class="content" v-html="lesson.rubric" />
+            </div>
+          </div>
+        </section>
+
         <hr>
 
         <nuxt-link to="/in-the-classroom">Back to All Lessons</nuxt-link>

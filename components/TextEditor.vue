@@ -22,7 +22,7 @@ export default {
       editorOption: {
         modules: {
           toolbar: [
-            [{ header: [1, 2, 3, 4, false] }],
+            [{ header: [false, 3, 4] }],
             ['bold', 'italic', 'underline'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             [{ 'align': [] }],
