@@ -14,16 +14,18 @@
         <div class="columns is-centered">
           <div class="column is-two-thirds-desktop">
             <p class="is-size-5 has-text-weight-bold tags-label">Tags</p>
-            <button
-              v-for="tag in tags"
-              :key="`tag-${tag.id}`"
-              class="button is-link"
-              :class="{ 'is-outlined': selectedTags.indexOf(tag) < 0 }"
-              :title="tag.description"
-              @click="toggleTag(tag, $event)"
-            >
-              {{ tag.name }}
-            </button>
+            <div class="buttons">
+              <button
+                v-for="tag in tags"
+                :key="`tag-${tag.id}`"
+                class="button is-link is-rounded"
+                :class="{ 'is-outlined': selectedTags.indexOf(tag) < 0 }"
+                :title="tag.description"
+                @click="toggleTag(tag, $event)"
+              >
+                {{ tag.name }}
+              </button>
+            </div>
 
             <hr>
 
@@ -117,10 +119,6 @@ export default {
 <style scoped>
 p {
   margin-bottom: 0.5rem;
-}
-
-button:not(:last-child) {
-  margin-right: 0.5rem;
 }
 
 .list-enter-active,
