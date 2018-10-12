@@ -12,7 +12,13 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  css: ['bulma/css/bulma.min.css', '~/css/main.css'],
+  css: [
+    'bulma/css/bulma.min.css',
+    'quill/dist/quill.bubble.css',
+    'quill/dist/quill.snow.css',
+    'quill/dist/quill.core.css',
+    '~/css/main.css'
+  ],
   loading: { color: '#00d1b1' },
   build: {
     extend (config, { isDev, isClient }) {
@@ -40,5 +46,9 @@ module.exports = {
   env: {
     apiUrl: process.env.API_URL || 'http://localhost:8000'
   },
-  plugins: ['~/plugins/directives.js', '~/plugins/global-components.js']
+  plugins: [
+    '~/plugins/directives.js',
+    '~/plugins/global-components.js',
+    { src: '~/plugins/quill-plugin.js', ssr: false }
+  ]
 }

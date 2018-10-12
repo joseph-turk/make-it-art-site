@@ -16,19 +16,19 @@
         <hr>
 
         <h2 class="title is-3">Inspiration</h2>
-        <p>{{ lesson.inspiration }}</p>
+        <div class="content" v-html="lesson.inspiration" />
 
         <h2 class="title is-3">Outcomes</h2>
-        <p>{{ lesson.outcomes }}</p>
+        <div class="content" v-html="lesson.outcomes" />
 
         <h2 class="title is-3">Procedure</h2>
-        <p>{{ lesson.procedure }}</p>
+        <div class="content" v-html="lesson.procedure" />
 
         <h2 class="title is-3">Exit Expectations</h2>
-        <p>{{ lesson.exit_expectations }}</p>
+        <div class="content" v-html="lesson.exit_expectations" />
 
         <h2 class="title is-3">Finishing Project</h2>
-        <p>{{ lesson.finish_notes }}</p>
+        <div class="content" v-html="lesson.finish_notes" />
         <hr>
 
         <nuxt-link to="/in-the-classroom">Back to All Lessons</nuxt-link>

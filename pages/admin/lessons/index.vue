@@ -90,7 +90,7 @@ export default {
 
   created () {
     axios
-      .get(`${process.env.apiUrl}/lessons/`, {
+      .get(`${process.env.apiUrl}/lessons/admin/`, {
         headers: {
           Authorization: `JWT ${this.$store.state.auth.accessToken}`
         }
