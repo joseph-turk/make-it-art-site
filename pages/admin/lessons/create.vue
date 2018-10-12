@@ -10,10 +10,6 @@
 
             <form @submit.prevent="handleSubmit">
               <div class="field">
-                <text-editor />
-              </div>
-
-              <div class="field">
                 <label
                   for="lessonName"
                   class="label"
@@ -35,11 +31,7 @@
                 >
                   Inspiration
                 </label>
-                <textarea
-                  id="lessonInspiration"
-                  class="textarea"
-                  v-model="inspiration"
-                />
+                <text-editor v-model="inspiration" />
               </div>
 
               <div class="field">
@@ -49,11 +41,7 @@
                 >
                   Outcomes
                 </label>
-                <textarea
-                  id="lessonOutcomes"
-                  class="textarea"
-                  v-model="outcomes"
-                />
+                <text-editor v-model="outcomes" />
               </div>
 
               <div class="field">
@@ -63,11 +51,7 @@
                 >
                   Procedure
                 </label>
-                <textarea
-                  id="lessonProcedure"
-                  class="textarea"
-                  v-model="procedure"
-                />
+                <text-editor v-model="procedure" />
               </div>
 
               <div class="field">
@@ -77,11 +61,7 @@
                 >
                   Exit Expectations
                 </label>
-                <textarea
-                  id="lessonExitExpectations"
-                  class="textarea"
-                  v-model="exitExpectations"
-                />
+                <text-editor v-model="exitExpectations" />
               </div>
 
               <div class="field">
@@ -91,11 +71,7 @@
                 >
                   Finishing Project
                 </label>
-                <textarea
-                  id="lessonFinishNotes"
-                  class="textarea"
-                  v-model="finishNotes"
-                />
+                <text-editor v-model="finishNotes" />
               </div>
 
               <div class="field">
